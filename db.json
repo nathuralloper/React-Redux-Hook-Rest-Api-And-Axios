@@ -1,0 +1,24 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Aprendiendo Redux",
+      "Precio": 30
+    },
+    {
+      "id": 2,
+      "nombre": "React y Redux",
+      "Precio": 40
+    },
+    {
+      "nombre": "Como programar Js",
+      "precio": "250",
+      "id": 5
+    },
+    {
+      "nombre": "Como programar C#",
+      "precio": "250",
+      "id": 6
+    }
+  ]
+}
