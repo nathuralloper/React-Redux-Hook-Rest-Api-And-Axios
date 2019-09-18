@@ -5,6 +5,8 @@ import { crearNuevoProductoAction } from '../actions/productosActions';
 import { validarFormularioAction, validacionExito, validacionError } from '../actions/validationActions';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Swal from 'sweetalert2';
+
 const NuevoProducto = ({history}) => {
 
     //state
@@ -43,6 +45,10 @@ const NuevoProducto = ({history}) => {
         agregarProducto({
             nombre, precio
         });
+
+        Swal.fire('Guardado',
+        'El producto se guardo correctamente',
+        'success');
 
         // Redireccionar
         history.push('/');

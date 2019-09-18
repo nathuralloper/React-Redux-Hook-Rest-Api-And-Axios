@@ -8,6 +8,12 @@ import {
     OBTENER_PRODUCTO_ELIMINAR,
     PRODUCTO_ELIMINADO_EXITO,
     PRODUCTO_ELIMINADO_ERROR,
+    OBTENER_PRODUCTO_EDITAR,
+    PRODUCTO_EDITAR_EXITO,
+    PRODUCTO_EDITAR_ERROR,
+    COMENZAR_EDICCION_PRODUCTO,
+    PRODUCTO_EDITADO_EXITO,
+    PRODUCTO_EDITADO_ERROR
 } from '../types';
 
 import clienteAxios from '../config/axios';
@@ -84,11 +90,9 @@ export function borrarProductosAction( id ) {
         clienteAxios.delete(`/productos/${id}`)
             .then(request => {                
                 dispatch(eliminarProductoExito(id) );
-            }).catch(error => {
-                eliminarProductoError();
+            }).catch(error => {              
                 dispatch(eliminarProductoError() );
             });
-
     }
 }
 
@@ -106,3 +110,59 @@ export const eliminarProductoError = () => ({
 });
 
 
+// obtener el producto a editar
+export function obtenerProductoEditarAction(id) {
+    return (dispatch) => {
+        dispatch(obtenerProductoAction() );
+
+        //obtener producto del api
+        clienteAxios.get(`/productos/${id}`)
+            .then(request => {
+                dispatch(obtenerProductoEditarExito(request.data) );
+            }).catch(error => {
+                dispatch(obtenerProductoEditarError() );
+            });
+    };
+}
+
+export const obtenerProductoAction = () => ({
+    type: OBTENER_PRODUCTO_EDITAR
+});
+
+export const obtenerProductoEditarExito = producto => ({
+    type: PRODUCTO_EDITAR_EXITO,
+    payload: producto
+});
+
+export const obtenerProductoEditarError = () => ({
+    type: PRODUCTO_EDITAR_ERROR
+});
+
+//Modifica un producto en la apu y state
+export function editarProductoAction( producto ){
+    return (dispatch) => {
+        dispatch(comenzarEdiccionProducto());
+
+        //consultar la API
+        clienteAxios.put(`/productos/${producto.id}`, producto)
+            .then(request => {
+                dispatch(editarProductoExito(request.data));
+            }).catch(error => {
+                dispatch(editarProductoError());
+            });
+
+    };
+}
+
+export const comenzarEdiccionProducto = () => ({
+    type: COMENZAR_EDICCION_PRODUCTO
+});
+
+export const editarProductoExito = producto => ({
+    type: PRODUCTO_EDITADO_EXITO,
+    payload: producto
+});
+
+export const editarProductoError = () => ({
+    type: PRODUCTO_EDITADO_ERROR
+});

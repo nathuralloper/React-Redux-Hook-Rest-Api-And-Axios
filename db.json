@@ -3,12 +3,7 @@
     {
       "id": 1,
       "nombre": "Aprendiendo Redux",
-      "Precio": 30
-    },
-    {
-      "id": 2,
-      "nombre": "React y Redux",
-      "Precio": 40
+      "precio": "250"
     },
     {
       "nombre": "Como programar Js",
